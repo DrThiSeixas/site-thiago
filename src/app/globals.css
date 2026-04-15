@@ -1,0 +1,168 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================================
+   Thiago Seixas — Advocacia Societária
+   Sistema visual B (azul-tinta + creme + latão editorial)
+   ========================================================= */
+
+:root {
+  /* Tintas (rgb para trabalhar com alpha do Tailwind) */
+  --ink: 13 26 43;
+  --ink-2: 18 33 58;
+  --ink-3: 26 46 75;
+  --paper: 239 231 212;
+  --paper-2: 230 220 197;
+  --paper-3: 247 242 228;
+  --parchment: 212 200 154;
+  --brass: 166 138 77;
+  --brass-2: 195 166 102;
+  --burgundy: 107 31 42;
+  --institutional: 168 198 230;
+  --institutional-2: 127 170 212;
+
+  /* Hairlines (usadas com rgb() para manter alpha fixo) */
+  --hair: rgba(212, 200, 154, 0.22);
+  --hair-light: rgba(212, 200, 154, 0.45);
+  --hair-dark: rgba(13, 26, 43, 0.12);
+  --hair-dark-strong: rgba(13, 26, 43, 0.22);
+}
+
+/* Reset editorial */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: rgb(var(--ink));
+  color: rgb(var(--paper));
+  font-family: var(--font-instrument-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "ss01", "ss02";
+  overflow-x: hidden;
+}
+::selection { background: rgb(var(--brass)); color: rgb(var(--ink)); }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+button { font: inherit; cursor: pointer; border: 0; background: transparent; color: inherit; }
+
+/* Utilidades do sistema ======================================= */
+.wrap { max-width: 1360px; margin: 0 auto; padding: 0 40px; }
+@media (max-width: 720px) { .wrap { padding: 0 22px; } }
+
+.eyebrow {
+  font-family: var(--font-instrument-sans);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgb(var(--brass-2));
+  font-weight: 500;
+}
+
+.serif { font-family: var(--font-fraunces); }
+.serif-it { font-family: var(--font-instrument-serif); font-style: italic; }
+
+/* Grão de papel aplicado por class="grain" */
+.grain { position: relative; }
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.9;
+  mix-blend-mode: overlay;
+}
+
+/* NAV ======================================================== */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(13, 26, 43, 0.88);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  border-bottom: 1px solid var(--hair);
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 18px 40px; gap: 40px; max-width: 1440px; margin: 0 auto; }
+.nav .logo-link img { height: 44px; width: auto; display: block; }
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a { font-size: 13px; letter-spacing: 0.02em; color: rgb(var(--paper)); opacity: 0.82; transition: opacity 0.3s, color 0.3s; position: relative; padding: 4px 0; }
+.nav-links a:hover { opacity: 1; color: rgb(var(--institutional)); }
+.nav-links a.active { color: rgb(var(--institutional)); opacity: 1; }
+.nav-links a.active::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 1px; background: rgb(var(--institutional)); }
+.nav-cta { display: inline-flex; align-items: center; gap: 10px; padding: 12px 20px; border: 1px solid rgb(var(--brass)); color: rgb(var(--brass-2)); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 500; transition: all 0.35s cubic-bezier(0.2, 0.7, 0.1, 1); position: relative; overflow: hidden; }
+.nav-cta::after { content: ""; position: absolute; inset: 0; background: rgb(var(--brass)); transform: translateY(101%); transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.1, 1); z-index: -1; }
+.nav-cta:hover { color: rgb(var(--ink)); border-color: rgb(var(--brass)); }
+.nav-cta:hover::after { transform: translateY(0); }
+.nav-cta .arr { font-family: var(--font-fraunces); font-size: 14px; }
+@media (max-width: 900px) { .nav-links { display: none; } }
+@media (max-width: 560px) { .nav-cta { padding: 10px 14px; font-size: 11px; } .nav .logo-link img { height: 36px; } }
+
+/* Seções base ================================================ */
+section { padding: 120px 0; position: relative; }
+@media (max-width: 720px) { section { padding: 80px 0; } }
+
+.sec-head { display: grid; grid-template-columns: 180px 1fr; gap: 60px; margin-bottom: 72px; align-items: baseline; position: relative; z-index: 1; }
+.sec-head .num { font-family: var(--font-instrument-serif); font-style: italic; font-size: 14px; color: rgb(var(--brass-2)); letter-spacing: 0.02em; border-top: 1px solid var(--hair); padding-top: 14px; }
+.sec-head .title { font-family: var(--font-fraunces); font-weight: 300; font-variation-settings: "opsz" 144; font-size: clamp(36px, 4.5vw, 64px); line-height: 1.02; letter-spacing: -0.02em; color: rgb(var(--paper)); max-width: 900px; }
+.sec-head .title em { font-family: var(--font-instrument-serif); color: rgb(var(--brass-2)); font-weight: 400; }
+@media (max-width: 800px) { .sec-head { grid-template-columns: 1fr; gap: 20px; margin-bottom: 48px; } }
+
+.light-sec { background: rgb(var(--paper)); color: rgb(var(--ink)); position: relative; }
+.light-sec::after { content: ""; position: absolute; inset: 0; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); mix-blend-mode: multiply; opacity: 0.6; }
+.light-sec .wrap { position: relative; z-index: 1; }
+.light-sec .sec-head .num { border-top-color: var(--hair-dark-strong); color: rgb(var(--brass)); }
+.light-sec .sec-head .title { color: rgb(var(--ink)); }
+.light-sec .sec-head .title em { color: rgb(var(--brass)); }
+.light-sec .eyebrow { color: rgb(var(--brass)); }
+
+/* Botões ===================================================== */
+.btn-primary { display: inline-flex; align-items: center; gap: 14px; padding: 18px 28px; background: rgb(var(--brass)); color: rgb(var(--ink)); font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; transition: all 0.3s; }
+.btn-primary:hover { background: rgb(var(--brass-2)); gap: 20px; }
+.btn-primary .arr { font-family: var(--font-instrument-serif); font-style: italic; font-size: 18px; }
+
+.btn-ghost { display: inline-flex; align-items: center; gap: 12px; padding: 18px 4px; color: rgb(var(--paper)); font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500; border-bottom: 1px solid var(--hair); transition: all 0.3s; }
+.btn-ghost:hover { color: rgb(var(--brass-2)); border-color: rgb(var(--brass)); }
+.btn-ghost .arr { font-family: var(--font-instrument-serif); font-style: italic; transition: transform 0.3s; }
+.btn-ghost:hover .arr { transform: translateX(5px); }
+
+.btn-ink { display: inline-flex; align-items: center; gap: 14px; padding: 20px 32px; background: rgb(var(--ink)); color: rgb(var(--paper)); font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; transition: all 0.3s; }
+.btn-ink:hover { background: rgb(var(--burgundy)); }
+.btn-ink .arr { font-family: var(--font-instrument-serif); font-style: italic; font-size: 18px; }
+
+.btn-ink-ghost { display: inline-flex; align-items: center; gap: 12px; padding: 20px 4px; color: rgb(var(--ink)); font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500; border-bottom: 1px solid var(--hair-dark-strong); transition: all 0.3s; }
+.btn-ink-ghost:hover { color: rgb(var(--burgundy)); border-color: rgb(var(--burgundy)); }
+
+/* Footer ===================================================== */
+footer { background: rgb(var(--ink)); padding: 80px 0 32px; border-top: 1px solid var(--hair); position: relative; z-index: 1; }
+.foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; margin-bottom: 60px; }
+@media (max-width: 900px) { .foot-grid { grid-template-columns: 1fr 1fr; gap: 40px; } }
+@media (max-width: 500px) { .foot-grid { grid-template-columns: 1fr; } }
+.foot-logo img { height: 56px; width: auto; margin-bottom: 20px; }
+.foot-desc { color: rgba(239, 231, 212, 0.55); font-size: 13.5px; line-height: 1.6; max-width: 320px; }
+.foot-h { font-family: var(--font-instrument-sans); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: rgb(var(--brass-2)); margin-bottom: 18px; font-weight: 500; }
+.foot-col a, .foot-col li { font-size: 13.5px; color: rgba(239, 231, 212, 0.72); line-height: 2; display: block; transition: color 0.2s; }
+.foot-col a:hover { color: rgb(var(--institutional)); }
+.foot-col ul { list-style: none; }
+.foot-base { display: flex; justify-content: space-between; padding-top: 32px; border-top: 1px solid var(--hair); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(239, 231, 212, 0.45); flex-wrap: wrap; gap: 20px; }
+.foot-base em { font-family: var(--font-instrument-serif); font-style: italic; text-transform: none; letter-spacing: 0; font-size: 12.5px; }
+
+/* WhatsApp flutuante ========================================= */
+.whats { position: fixed; right: 24px; bottom: 24px; z-index: 40; background: rgb(var(--ink)); border: 1px solid rgb(var(--brass)); padding: 14px 20px; font-family: var(--font-instrument-sans); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: rgb(var(--brass-2)); font-weight: 500; transition: all 0.3s; }
+.whats:hover { background: rgb(var(--brass)); color: rgb(var(--ink)); }
+
+/* Reveal ===================================================== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade { animation: fadeUp 0.9s cubic-bezier(0.2, 0.7, 0.1, 1) both; }
+.d1 { animation-delay: 0.05s; }
+.d2 { animation-delay: 0.15s; }
+.d3 { animation-delay: 0.25s; }
+.d4 { animation-delay: 0.35s; }
+.d5 { animation-delay: 0.45s; }
