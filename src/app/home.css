@@ -70,12 +70,13 @@
 .manifesto .sig::before { content: ""; width: 48px; height: 1px; background: rgb(var(--brass)); }
 
 /* Artigos cards */
-.art-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 0; border-top: 1px solid var(--hair); }
-@media (max-width: 1000px) { .art-grid { grid-template-columns: 1fr; } }
-.art-card { padding: 40px 36px; border-right: 1px solid var(--hair); border-bottom: 1px solid var(--hair); display: flex; flex-direction: column; justify-content: space-between; min-height: 360px; position: relative; transition: background 0.3s; }
+.art-grid { display: grid; grid-template-columns: 1.3fr 1fr; grid-template-rows: 1fr 1fr; gap: 0; border-top: 1px solid var(--hair); }
+@media (max-width: 1000px) { .art-grid { grid-template-columns: 1fr; grid-template-rows: auto; } }
+.art-card { padding: 40px 36px; border-right: 1px solid var(--hair); border-bottom: 1px solid var(--hair); display: flex; flex-direction: column; justify-content: space-between; min-height: 260px; position: relative; transition: background 0.3s; }
+.art-card.big { grid-row: 1 / -1; }
 .art-card:last-child { border-right: 0; }
 .art-card:hover { background: rgb(var(--ink-3)); }
-@media (max-width: 1000px) { .art-card { border-right: 0; } }
+@media (max-width: 1000px) { .art-card { border-right: 0; } .art-card.big { grid-row: auto; } }
 .art-card .meta { display: flex; gap: 18px; align-items: center; font-family: var(--font-instrument-sans); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgb(var(--brass-2)); margin-bottom: 24px; }
 .art-card .meta span:nth-child(2) { color: rgba(239,231,212,.4); }
 .art-card h3 { font-family: var(--font-fraunces); font-weight: 400; font-variation-settings: "opsz" 72; font-size: clamp(22px, 2vw, 28px); line-height: 1.2; letter-spacing: -0.015em; color: rgb(var(--paper)); margin-bottom: 16px; }
