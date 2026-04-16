@@ -7,6 +7,7 @@ import Script from 'next/script';
 export function Analytics() {
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
   const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+  const awId = process.env.NEXT_PUBLIC_AW_CONVERSION_ID;
 
   if (process.env.NODE_ENV !== 'production') return null;
 
@@ -31,7 +32,7 @@ export function Analytics() {
             id="gtag"
             strategy="afterInteractive"
             dangerouslySetInnerHTML={{
-              __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaId}',{anonymize_ip:true});`,
+              __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaId}',{anonymize_ip:true});${awId ? `gtag('config','${awId}');` : ''}`,
             }}
           />
         </>
