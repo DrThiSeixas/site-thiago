@@ -118,7 +118,7 @@ export default function GuiaHoldingPage() {
                 Advogado com atuação concentrada em direito societário — {site.oab}. Conduz projetos de estruturação patrimonial, holding, organização sucessória e governança — familiar e societária — por meio de método próprio de trabalho.
               </p>
               <p style={{fontFamily:'var(--font-fraunces)',fontVariationSettings:'"opsz" 36',fontSize:18,lineHeight:1.65,color:'rgba(13,26,43,.82)',marginBottom:28}}>
-                Especialização específica em holdings (2018) e atualização técnica contínua (Holding Masters, 2025). Este guia condensa o essencial do que aparece em projetos reais conduzidos pelo escritório.
+                Formação técnica em holdings (2018) e atualização técnica contínua (Holding Masters, 2025). Este guia condensa o essencial do que aparece em projetos reais conduzidos pelo escritório.
               </p>
               <Link href="/sobre" className="btn-ink-ghost" style={{color:'rgb(var(--ink))',borderBottomColor:'var(--hair-dark-strong)'}}>
                 Conhecer a trajetória <span className="arr" style={{fontFamily:'var(--font-instrument-serif)',fontStyle:'italic'}}>→</span>

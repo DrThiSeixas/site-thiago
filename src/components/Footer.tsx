@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { site, waUrl } from '@/lib/site';
+import { TrackedContactLink } from '@/components/TrackedContactLink';
 
 export function Footer() {
   const anoAtual = new Date().getFullYear();
@@ -13,7 +14,7 @@ export function Footer() {
               <Image src="/assets/escudo.png" alt={site.nome} width={120} height={120} style={{ height: 56, width: 'auto' }} />
             </div>
             <p className="foot-desc">
-              Advocacia societária com foco em holding patrimonial, governança e organização sucessória. {site.oab}.
+              Advocacia societária aplicada à organização de empresas, patrimônios e famílias empresárias. {site.oab}.
             </p>
             <p
               className="foot-desc"
@@ -34,8 +35,8 @@ export function Footer() {
             <div className="foot-h">Navegar</div>
             <ul>
               <li><Link href="/">Home</Link></li>
-              <li><Link href="/sobre">Sobre</Link></li>
-              <li><Link href="/atuacao">Atuação</Link></li>
+              <li><Link href="/advocacia-societaria">Advocacia societária</Link></li>
+              <li><Link href="/holding-patrimonial-familiar">Holding patrimonial</Link></li>
               <li><Link href="/metodo">Método</Link></li>
               <li><Link href="/artigos">Artigos</Link></li>
               <li><Link href="/contato">Contato</Link></li>
@@ -45,8 +46,16 @@ export function Footer() {
           <div className="foot-col">
             <div className="foot-h">Canais oficiais</div>
             <ul>
-              <li><a href={`mailto:${site.contato.email}`}>{site.contato.email}</a></li>
-              <li><a href={waUrl()} target="_blank" rel="noopener">WhatsApp {site.contato.whatsappFormatado}</a></li>
+              <li>
+                <TrackedContactLink href={`mailto:${site.contato.email}`} eventName="click_email" local="footer">
+                  {site.contato.email}
+                </TrackedContactLink>
+              </li>
+              <li>
+                <TrackedContactLink href={waUrl()} eventName="click_whatsapp" local="footer" target="_blank" rel="noopener">
+                  WhatsApp {site.contato.whatsappFormatado}
+                </TrackedContactLink>
+              </li>
               <li><a href={site.contato.linkedin} target="_blank" rel="noopener">LinkedIn</a></li>
               <li><Link href="/portal">Portal do Cliente</Link></li>
             </ul>
@@ -55,9 +64,10 @@ export function Footer() {
           <div className="foot-col">
             <div className="foot-h">Institucional</div>
             <ul>
+              <li><Link href="/sobre">Sobre</Link></li>
+              <li><Link href="/atuacao">Atuação completa</Link></li>
               <li><Link href="/privacidade">Política de privacidade</Link></li>
               <li><Link href="/termos">Termos de uso</Link></li>
-              <li><Link href="/contato#aviso-seguranca">Aviso de segurança</Link></li>
               <li><a href="https://cna.oab.org.br" target="_blank" rel="noopener">Verificar OAB/SP →</a></li>
             </ul>
           </div>

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 const trajetoria = [
   { ano: '2005', label: 'Graduação', titulo: 'Direito', inst: 'UNIFEOB — Centro Universitário da Fundação de Ensino Octávio Bastos' },
   { ano: '2009', label: 'Pós-Graduação', titulo: 'Direito Empresarial', inst: 'PUC Minas — Pontifícia Universidade Católica de Minas Gerais' },
-  { ano: '2018', label: 'Especialização', titulo: 'Holdings patrimoniais', inst: 'Formação técnica específica em estruturação de holdings familiares e empresariais' },
+  { ano: '2018', label: 'Formação técnica', titulo: 'Holdings patrimoniais', inst: 'Formação técnica específica em estruturação de holdings familiares e empresariais' },
   { ano: '2025', label: 'Atualização', titulo: 'Holding Masters', inst: 'Atualização e aprofundamento técnico em estruturação patrimonial e sucessória' },
   { ano: 'Atual', label: 'Escritório', titulo: site.nome, inst: 'Atuação consultiva concentrada em estruturação societária e patrimonial' },
 ];

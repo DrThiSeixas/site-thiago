@@ -35,7 +35,7 @@ export function Nav() {
         </div>
 
         <Link href="/contato" className="nav-cta">
-          Agendar conversa <span className="arr">→</span>
+          Enviar demanda <span className="arr">→</span>
         </Link>
       </div>
     </nav>

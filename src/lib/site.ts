@@ -10,7 +10,7 @@ export const site = {
   autor: 'Thiago Seixas',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://thiagoseixas.adv.br',
   descricao:
-    'Estruturação patrimonial e societária conduzida por método. Holding patrimonial, governança familiar e organização sucessória com visão preventiva.',
+    'Advocacia societária aplicada à organização de empresas, patrimônios e famílias empresárias. Holding patrimonial, governança familiar e organização sucessória com visão preventiva.',
 
   contato: {
     email: process.env.NEXT_PUBLIC_EMAIL || 'contato@thiagoseixas.adv.br',
@@ -29,7 +29,8 @@ export const site = {
   },
 
   nav: [
-    { href: '/atuacao', label: 'Atuação' },
+    { href: '/advocacia-societaria', label: 'Societário' },
+    { href: '/holding-patrimonial-familiar', label: 'Holding' },
     { href: '/metodo', label: 'Método' },
     { href: '/artigos', label: 'Artigos' },
     { href: '/sobre', label: 'Sobre' },

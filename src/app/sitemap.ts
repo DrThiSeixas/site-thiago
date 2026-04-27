@@ -13,17 +13,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = site.url;
   const now = new Date();
 
-  // Rotas fixas (páginas institucionais)
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: `${base}/`,         lastModified: now, changeFrequency: 'monthly', priority: 1.0 },
-    { url: `${base}/sobre`,    lastModified: now, changeFrequency: 'yearly',  priority: 0.7 },
-    { url: `${base}/metodo`,   lastModified: now, changeFrequency: 'yearly',  priority: 0.7 },
-    { url: `${base}/atuacao`,  lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${base}/contato`,  lastModified: now, changeFrequency: 'yearly',  priority: 0.6 },
-    { url: `${base}/artigos`,  lastModified: now, changeFrequency: 'weekly',  priority: 0.9 },
+    { url: `${base}/`, lastModified: now, changeFrequency: 'monthly', priority: 1.0 },
+    { url: `${base}/advocacia-societaria`, lastModified: now, changeFrequency: 'monthly', priority: 0.95 },
+    { url: `${base}/holding-patrimonial-familiar`, lastModified: now, changeFrequency: 'monthly', priority: 0.95 },
+    { url: `${base}/atuacao`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${base}/sobre`, lastModified: now, changeFrequency: 'yearly', priority: 0.7 },
+    { url: `${base}/metodo`, lastModified: now, changeFrequency: 'yearly', priority: 0.7 },
+    { url: `${base}/contato`, lastModified: now, changeFrequency: 'yearly', priority: 0.6 },
+    { url: `${base}/artigos`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
   ];
 
-  // Landings por frente de atuação
   const frenteRoutes: MetadataRoute.Sitemap = site.frentes.map((f) => ({
     url: `${base}/atuacao/${f.slug}`,
     lastModified: now,
@@ -31,7 +31,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  // Artigos — puxa do Sanity (silenciosamente ignora erros)
   let artigoRoutes: MetadataRoute.Sitemap = [];
   try {
     const artigos = await sanityClient.fetch<ArtigoSitemap[]>(sitemapArtigosQuery);

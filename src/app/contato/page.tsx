@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 import { Whats } from '@/components/Whats';
+import { TrackedContactLink } from '@/components/TrackedContactLink';
 import { ContactForm } from './ContactForm';
 import { site, mapsUrl, waUrl } from '@/lib/site';
 import '../internals.css';
@@ -10,7 +11,7 @@ import '../internals.css';
 export const metadata: Metadata = {
   title: 'Contato',
   description: `Canais oficiais do escritório. WhatsApp, e-mail e formulário qualificador. ${site.endereco.logradouro} — ${site.endereco.cidade} — ${site.endereco.uf}.`,
-  openGraph: { title: `Contato — ${site.nomeCurto}`, images: ['/assets/fotos/og-sorriso.jpg'] },
+  openGraph: { title: `Contato — ${site.nomeCurto}`, images: ['/assets/logo-vertical.png'] },
   alternates: { canonical: '/contato' },
 };
 
@@ -21,8 +22,11 @@ export default function ContatoPage() {
       <header className="page-head">
         <div className="wrap">
           <div className="crumb"><Link href="/">Início</Link><span className="sep">/</span>Contato</div>
-          <h1 className="fade d1" dangerouslySetInnerHTML={{__html:'Uma primeira conversa <em>não compromete</em> — estrutura.'}} />
-          <p className="lede fade d2">O primeiro contato serve para entender o cenário. Conte brevemente sua situação, e retorno em até 24 horas úteis com a direção mais adequada para seguirmos.</p>
+          <h1 className="fade d1">Apresente sua demanda para análise inicial.</h1>
+          <p className="lede fade d2">
+            O primeiro contato serve para entender o cenário. O retorno será feito pelos canais oficiais,
+            após análise preliminar da mensagem enviada.
+          </p>
         </div>
       </header>
 
@@ -30,17 +34,21 @@ export default function ContatoPage() {
         <div className="wrap">
           <div className="contact-grid">
             <div className="form-wrap">
-              <h2 dangerouslySetInnerHTML={{__html:'Formulário <em>qualificador</em>'}} />
-              <p className="note">As informações abaixo me ajudam a entender o contexto e dar um retorno mais preciso. Quanto mais específico, melhor — mas sem formalidade obrigatória.</p>
-              <ContactForm />
+              <h2>Formulário <em>qualificador</em></h2>
+              <p className="note">As informações abaixo ajudam a identificar a natureza da demanda e o melhor encaminhamento técnico.</p>
+              <ContactForm origem="contato" submitLabel="Enviar demanda" />
             </div>
 
             <aside className="contact-aside">
               <div className="block">
                 <div className="label">Canais oficiais</div>
                 <div className="val">
-                  <a href={`mailto:${site.contato.email}`}>{site.contato.email}</a><br />
-                  <a href={waUrl()}>WhatsApp {site.contato.whatsappFormatado}</a><br />
+                  <TrackedContactLink href={`mailto:${site.contato.email}`} eventName="click_email" local="contato_aside">
+                    {site.contato.email}
+                  </TrackedContactLink><br />
+                  <TrackedContactLink href={waUrl()} eventName="click_whatsapp" local="contato_aside" target="_blank" rel="noopener">
+                    WhatsApp {site.contato.whatsappFormatado}
+                  </TrackedContactLink><br />
                   <a href={site.contato.linkedin} target="_blank" rel="noopener">LinkedIn — {site.autor}</a>
                 </div>
               </div>
@@ -74,10 +82,10 @@ export default function ContatoPage() {
       <section className="warning-sec" id="aviso-seguranca">
         <div className="wrap">
           <span className="eyebrow">Aviso de segurança</span>
-          <h3 dangerouslySetInnerHTML={{__html:'Todas as comunicações ocorrem <em>exclusivamente</em> pelos canais oficiais.'}} />
-          <p>O escritório <strong>{site.nome}</strong> realiza todas as suas comunicações, envio de documentos e tratativas exclusivamente pelos canais listados nesta página: o e-mail <strong>{site.contato.email}</strong>, o WhatsApp oficial <strong>{site.contato.whatsappFormatado}</strong>, o perfil oficial no LinkedIn e este site <strong>thiagoseixas.adv.br</strong>.</p>
-          <p>Não são utilizados <em>perfis pessoais em redes sociais, aplicativos de mensagem não oficiais ou endereços de e-mail de domínios genéricos</em> para qualquer tipo de comunicação profissional. Em caso de dúvida sobre a autenticidade de qualquer contato, confirme diretamente pelo e-mail ou WhatsApp oficiais antes de prosseguir com qualquer tratativa.</p>
-          <p>O escritório nunca solicita transferências, pagamentos ou dados sensíveis por meios não oficiais. Desconfie de qualquer contato que se apresente como representante do escritório fora dos canais listados.</p>
+          <h3>Todas as comunicações ocorrem <em>exclusivamente</em> pelos canais oficiais.</h3>
+          <p>O escritório <strong>{site.nome}</strong> realiza suas comunicações, envio de documentos e tratativas exclusivamente pelos canais listados nesta página: o e-mail <strong>{site.contato.email}</strong>, o WhatsApp oficial <strong>{site.contato.whatsappFormatado}</strong>, o perfil oficial no LinkedIn e este site <strong>thiagoseixas.adv.br</strong>.</p>
+          <p>Não são utilizados <em>perfis pessoais em redes sociais, aplicativos de mensagem não oficiais ou endereços de e-mail de domínios genéricos</em> para qualquer tipo de comunicação profissional.</p>
+          <p>Em caso de dúvida sobre a autenticidade de qualquer contato, confirme diretamente pelo e-mail ou WhatsApp oficiais antes de prosseguir.</p>
         </div>
       </section>
 
