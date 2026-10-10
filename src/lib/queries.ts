@@ -1,7 +1,7 @@
 import { groq } from 'next-sanity';
 // Legacy Studio uses resumo/conteudo/dataPublicacao and a string category.
-// Keep those published documents readable while the new Studio is rolled out.
-export const PUBLIC_ARTIGO = groq`_type == "artigo" && !(_id in path("drafts.**")) && defined(slug.current) && coalesce(retirado, false) == false && coalesce(area, "societario") in ["societario", "tributario"] && coalesce(statusEditorial, "aprovado") == "aprovado" && dateTime(coalesce(publicadoEm, dataPublicacao + "T12:00:00Z")) <= dateTime(now())`;
+// Publication requires explicit approval; the previous editorial collection is retired.
+export const PUBLIC_ARTIGO = groq`_type == "artigo" && !(_id in path("drafts.**")) && defined(slug.current) && coalesce(retirado, false) == false && coalesce(area, "societario") in ["societario", "tributario"] && statusEditorial == "aprovado" && dateTime(coalesce(publicadoEm, dataPublicacao + "T12:00:00Z")) <= dateTime(now())`;
 export const ARTIGO_CARD_FIELDS = groq`
  _id, titulo, slug, "chamada": coalesce(chamada, resumo),
  "publicadoEm": coalesce(publicadoEm, dataPublicacao + "T12:00:00Z"), tempoLeitura,

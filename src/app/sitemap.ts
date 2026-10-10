@@ -1,7 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { sanityClient } from '@/lib/sanity';
 import { sitemapArtigosQuery } from '@/lib/queries';
-import { acervo } from '@/lib/acervo';
 import { site } from '@/lib/site';
 
 export const revalidate = 600;
@@ -48,5 +47,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     artigoRoutes = [];
   }
 
-  return [...staticRoutes, ...frenteRoutes, ...artigoRoutes, ...acervo.map(a=>({url:`${base}/acervo/${a.slug}`,lastModified:new Date('2026-10-09T12:00:00Z')}))];
+  return [...staticRoutes, ...frenteRoutes, ...artigoRoutes];
 }

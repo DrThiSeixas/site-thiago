@@ -5,7 +5,6 @@ import { Footer } from '@/components/Footer';
 import { Whats } from '@/components/Whats';
 import { sanityClient } from '@/lib/sanity';
 import { artigosQuery, categoriasQuery } from '@/lib/queries';
-import { acervo } from '@/lib/acervo';
 import { site } from '@/lib/site';
 import '../internals.css';
 
@@ -85,7 +84,7 @@ export default async function ArtigosPage({searchParams}:{searchParams:Promise<{
         <div className="wrap">
           {artigos.length === 0 ? (
             <div style={{padding:'80px 0',textAlign:'center',color:'rgba(239,231,212,.6)',fontFamily:'var(--font-instrument-serif)',fontStyle:'italic',fontSize:18}}>
-              {unavailable?'Os artigos estão temporariamente indisponíveis. Tente novamente mais tarde.':'Ainda não há artigos publicados nesta seleção.'}
+              {unavailable?'Os artigos estão temporariamente indisponíveis. Tente novamente mais tarde.':'Estamos preparando novos artigos sobre as decisões societárias e tributárias da empresa. Em breve, as primeiras leituras estarão disponíveis.'}
             </div>
           ) : (
             <div className="artigos-grid">
@@ -105,7 +104,6 @@ export default async function ArtigosPage({searchParams}:{searchParams:Promise<{
         </div>
       </section>
 
-      {!params.cat && area!=='tributario' && <section><div className="wrap"><h2 style={{fontSize:36,marginBottom:28}}>Do acervo revisado</h2><div className="artigos-grid">{acervo.map(a=><Link className="card-art" key={a.slug} href={`/acervo/${a.slug}`}><span className="cat">{a.categoria}</span><h3>{a.titulo}</h3><p>{a.chamada}</p><div className="foot">Revisado em outubro de 2026 <span>→</span></div></Link>)}</div></div></section>}
       <Footer />
       <Whats />
     </>
