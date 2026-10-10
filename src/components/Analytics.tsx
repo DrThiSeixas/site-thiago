@@ -1,7 +1,7 @@
 import Script from 'next/script';
 
 /**
- * GA4 via GTM — só renderiza se as variáveis de ambiente estiverem preenchidas.
+ * Preserva o contêiner GTM do site institucional; o ambiente pode substituir o ID.
  * Em ambiente de desenvolvimento (NODE_ENV !== 'production'), não carrega.
  */
 export function Analytics() {
