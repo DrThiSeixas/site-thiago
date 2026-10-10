@@ -1,43 +1,6 @@
 'use client';
-
 import Link from 'next/link';
-import Image from 'next/image';
+import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { site } from '@/lib/site';
-
-export function Nav() {
-  const pathname = usePathname();
-  const isActive = (href: string) => {
-    if (href === '/') return pathname === '/';
-    return pathname?.startsWith(href) ?? false;
-  };
-
-  return (
-    <nav className="nav">
-      <div className="nav-inner">
-        <Link href="/" className="logo-link" aria-label={site.nome}>
-          <Image
-            src="/assets/logo-horizontal-dark.png"
-            alt={site.nome}
-            width={280}
-            height={88}
-            priority
-            style={{ height: 44, width: 'auto' }}
-          />
-        </Link>
-
-        <div className="nav-links">
-          {site.nav.map((item) => (
-            <Link key={item.href} href={item.href} className={isActive(item.href) ? 'active' : undefined}>
-              {item.label}
-            </Link>
-          ))}
-        </div>
-
-        <Link href="/contato" className="nav-cta">
-          Enviar demanda <span className="arr">→</span>
-        </Link>
-      </div>
-    </nav>
-  );
-}
+export function Nav(){const pathname=usePathname();const [open,setOpen]=useState(false);return <><a className="skip-link" href="#conteudo">Ir para o conteúdo</a><nav className="nav" aria-label="Navegação principal" onKeyDown={e=>{if(e.key==='Escape'){setOpen(false);document.getElementById('menu-toggle')?.focus()}}}><div className="nav-inner"><Link href="/" className="wordmark" aria-label={site.nome}><img src="/assets/approved/simbolo.svg" width="36" height="44" alt=""/><span>THIAGO SEIXAS<small>ADVOCACIA EMPRESARIAL</small></span></Link><button id="menu-toggle" className="mobile-menu" aria-expanded={open} aria-controls="main-links" onClick={()=>setOpen(!open)}>Menu {open?'×':'☰'}</button><div className={`nav-links ${open?'is-open':''}`} id="main-links">{site.nav.map(item=><Link key={item.href} href={item.href} aria-current={pathname?.startsWith(item.href)?'page':undefined} onClick={()=>setOpen(false)}>{item.label}</Link>)}</div><Link href="/contato" className="nav-cta" onClick={()=>setOpen(false)}>Entre em contato ↗</Link></div></nav></>}

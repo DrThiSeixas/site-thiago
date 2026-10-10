@@ -13,6 +13,21 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['@portabletext/react'],
   },
+  async redirects() {
+    const aliases = {
+      '/thiagoseixas-novo-site': '/', '/analise-societaria': '/advocacia-societaria', '/artigos.html': '/artigos',
+      '/artigo-acordo-de-socios-pt':'/artigos/acordo-de-socios-o-instrumento-que-previne-os-conflitos-mais-graves',
+      '/artigo-holding-pt':'/artigos/holding-patrimonial-o-que-e-para-que-serve-e-quando-faz-sentido',
+      '/artigo-sucessao-socio-pt':'/artigos/planejamento-sucessorio-o-custo-de-nao-organizar-a-transmissao-patrimonial',
+      '/artigo-distribuicao-lucros-pt':'/acervo/distribuicao-de-lucros',
+      '/artigo-divorcio-socio-pt':'/acervo/divorcio-do-socio',
+      '/artigo-scp-pt':'/acervo/sociedade-em-conta-de-participacao',
+    };
+    return Object.entries(aliases).flatMap(([source,destination])=>[
+      {source,destination,permanent:true},
+      ...(source.endsWith('.html')?[]:[{source:source+'.html',destination,permanent:true}]),
+    ]);
+  },
   async headers() {
     return [
       {

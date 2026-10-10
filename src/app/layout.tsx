@@ -1,38 +1,17 @@
 import type { Metadata, Viewport } from 'next';
-import { Fraunces, Instrument_Sans, Instrument_Serif } from 'next/font/google';
+import { Libre_Caslon_Display, DM_Sans } from 'next/font/google';
 import { SchemaOrg } from '@/components/SchemaOrg';
 import { Analytics, AnalyticsNoscript } from '@/components/Analytics';
 import { site } from '@/lib/site';
 import './globals.css';
 
-const fraunces = Fraunces({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '700'],
-  style: ['normal', 'italic'],
-  variable: '--font-fraunces',
-  display: 'swap',
-});
-
-const instrumentSans = Instrument_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  style: ['normal', 'italic'],
-  variable: '--font-instrument-sans',
-  display: 'swap',
-});
-
-const instrumentSerif = Instrument_Serif({
-  subsets: ['latin'],
-  weight: ['400'],
-  style: ['normal', 'italic'],
-  variable: '--font-instrument-serif',
-  display: 'swap',
-});
+const display = Libre_Caslon_Display({subsets:['latin'],weight:'400',variable:'--font-fraunces',display:'swap'});
+const sans = DM_Sans({subsets:['latin'],variable:'--font-instrument-sans',display:'swap'});
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#0D1A2B',
+  themeColor: '#152e4e',
 };
 
 export const metadata: Metadata = {
@@ -85,7 +64,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${fraunces.variable} ${instrumentSans.variable} ${instrumentSerif.variable}`}>
+    <html lang="pt-BR" className={`${display.variable} ${sans.variable}`}>
       <head>
         <SchemaOrg />
         <Analytics />

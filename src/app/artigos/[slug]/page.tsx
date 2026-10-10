@@ -9,6 +9,7 @@ import { PortableBody } from '@/components/PortableBody';
 import { ArticleSchema } from '@/components/SchemaOrg';
 import { sanityClient } from '@/lib/sanity';
 import { artigoBySlugQuery, allArtigoSlugsQuery } from '@/lib/queries';
+import { headingId } from '@/lib/article-format';
 import { site } from '@/lib/site';
 import '../../internals.css';
 
@@ -67,7 +68,7 @@ export default async function ArtigoPage({ params }: PageProps) {
     for (const block of a.corpo) {
       if (block?._type === 'block' && block.style === 'h2') {
         const texto = (block.children || []).map((c: any) => c.text || '').join('');
-        const id = texto.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+        const id = headingId(block);
         if (texto && id) toc.push({ id, titulo: texto });
       }
     }
@@ -85,7 +86,7 @@ export default async function ArtigoPage({ params }: PageProps) {
         imagemUrl={a.ogImage?.asset?.url || a.capa?.asset?.url}
       />
 
-      <header className="art-head">
+      <header id="conteudo" className="art-head">
         <div className="wrap">
           <div className="breadcrumbs">
             <Link href="/">Início</Link>
@@ -131,7 +132,7 @@ export default async function ArtigoPage({ params }: PageProps) {
                   />
                 </div>
                 <div>
-                  <div className="name" dangerouslySetInnerHTML={{__html: (a.autor?.nome || site.autor).replace(/^(\S+)\s(.+)$/, '$1 <em>$2</em>')}} />
+                  <div className="name">{a.autor?.nome || site.autor}</div>
                   <span className="oab">{a.autor?.oab || site.oab}</span>
                   <p>{a.autor?.bio || `Advogado com atuação concentrada em direito societário, estruturação patrimonial, holding, governança e organização sucessória. ${site.endereco.cidade} — ${site.endereco.uf}.`}</p>
                 </div>

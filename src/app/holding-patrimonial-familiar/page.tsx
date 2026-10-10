@@ -27,7 +27,7 @@ const quandoFazSentido = [
   'Participações societárias que precisam ser centralizadas ou reorganizadas.',
   'Imóveis alugados, bens de uso familiar ou patrimônio rural com gestão dispersa.',
   'Intenção de doar quotas com reserva de usufruto e cláusulas adequadas ao caso.',
-  'Necessidade de governança familiar para reduzir improviso decisório.',
+  'Necessidade de governança familiar para dar clareza às decisões.',
 ];
 
 const comoFunciona = [

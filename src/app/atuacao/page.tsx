@@ -9,7 +9,7 @@ import '../internals.css';
 
 export const metadata: Metadata = {
   title: 'Atuação',
-  description: 'Seis frentes de atuação: holding, governança familiar e societária, organização patrimonial e sucessória, estruturação societária preventiva.',
+  description: 'Atuação societária e tributária para empresas, sócios e famílias empresárias.',
   openGraph: { title: `Atuação — ${site.nomeCurto}`, images: ['/assets/fotos/og-institucional.jpg'] },
   alternates: { canonical: '/atuacao' },
 };
@@ -21,15 +21,15 @@ export default function AtuacaoPage() {
   return (
     <>
       <Nav />
-      <header className="page-head">
+      <header id="conteudo" className="page-head">
         <div className="wrap">
           <div className="crumb">
             <Link href="/">Início</Link>
             <span className="sep">/</span>Atuação
           </div>
-          <h1 className="fade d1" dangerouslySetInnerHTML={{__html:'Direito societário aplicado à <em>arquitetura</em> patrimonial.'}} />
+          <h1 className="fade d1" dangerouslySetInnerHTML={{__html:'Duas frentes para as questões <em>da sua empresa.</em>'}} />
           <p className="lede fade d2">
-            As frentes abaixo não são serviços isolados — são dimensões de um mesmo trabalho integrado, conduzido com método e visão preventiva. Cada uma pode ser ponto de partida; todas convergem para o mesmo princípio: estruturas desenhadas para a realidade concreta do cliente.
+            Societário: regras entre sócios, administração, família e continuidade. Tributário: cobranças, dívida ativa, execução fiscal e alternativas jurídicas. O trabalho parte da situação concreta e dos documentos.
           </p>
         </div>
       </header>
@@ -37,6 +37,7 @@ export default function AtuacaoPage() {
       <section className="act-index">
         <div className="wrap">
           <div className="act-index-grid">
+            <Link href="/advocacia-tributaria" className="act-index-item"><span className="n">Tributário</span><h3>Cobranças e questões tributárias</h3><span className="arr">→</span></Link>
             {frentesArr.map((f, i) => (
               <Link key={f.slug} href={`/atuacao/${f.slug}`} className="act-index-item">
                 <span className="n">{romanos[i]}. frente</span>

@@ -183,3 +183,11 @@ footer { background: rgb(var(--ink)); padding: 80px 0 32px; border-top: 1px soli
   .nav-inner { padding: 14px 18px; gap: 18px; }
   .nav-cta { letter-spacing: .1em; }
 }
+
+/* Approved institutional identity and accessible navigation. */
+:root{--font-instrument-serif:var(--font-fraunces);--brass:224 183 120;--brass-2:224 183 120;--ink:21 46 78;--paper:248 247 243}
+html{scroll-padding-top:110px}body{overflow-wrap:break-word}.grain::before{display:none}.wordmark{display:flex;align-items:center;gap:12px;flex-shrink:0}.wordmark span{font-size:17px;letter-spacing:.07em;font-weight:700}.wordmark small{display:block;font-size:8px;letter-spacing:.2em;margin-top:3px}.nav-inner{gap:24px}.nav-cta{background:#e0b778;color:#152e4e;letter-spacing:.01em;text-transform:none;font-size:13px;font-weight:600}.nav-cta:hover{background:#edc894}.mobile-menu{display:none}.skip-link{position:fixed;top:-100px;z-index:100;background:#fff;color:#152e4e;padding:12px}.skip-link:focus{top:8px}a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #e0b778;outline-offset:5px}.foot-col a[href^="mailto:"]{color:#f3d5a9;font-weight:600;overflow-wrap:anywhere}.prose{overflow-wrap:anywhere}.prose img{height:auto;max-width:100%}.prose h2{scroll-margin-top:110px}.empty-message{padding:60px 0;font-size:18px}.form-help{font-size:14px;margin:14px 0;color:inherit}
+@media(max-width:1050px){.nav-links{gap:16px}.nav-inner{padding:16px 22px}.nav-cta{padding:12px}}
+@media(max-width:900px){.mobile-menu{display:block;margin-left:auto}.nav-links{display:none}.nav-links.is-open{display:flex;position:absolute;top:100%;left:0;right:0;background:#152e4e;flex-direction:column;padding:22px;align-items:stretch;border-bottom:1px solid #e0b778}.nav-links a{padding:10px}.nav-inner{flex-wrap:wrap}.wordmark span{font-size:14px}.nav-cta{font-size:12px}.nav-links.is-open a{font-size:16px}}
+@media(max-width:400px){.nav-inner{gap:10px;padding:12px}.wordmark img{width:26px}.wordmark span{font-size:12px}.wordmark small{font-size:7px}.nav-cta{padding:9px;font-size:11px}.mobile-menu{font-size:13px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}

@@ -79,7 +79,7 @@ const holding: Frente = {
     { pergunta: 'Qual o patrimônio mínimo que justifica uma holding?', resposta: 'Não há valor mínimo legal, mas existe um <em>ponto de equilíbrio econômico</em>. Abaixo de determinado patamar, o custo de manutenção supera o benefício tributário e sucessório. O diagnóstico responde caso a caso.' },
     { pergunta: 'Integralizar imóveis na holding paga ITBI?', resposta: 'Depende. A Constituição prevê imunidade na integralização de capital, mas o STF fixou no Tema 796 que a imunidade é condicional quando a atividade preponderante for imobiliária. <em>Análise caso a caso é obrigatória</em>.' },
     { pergunta: 'E o ganho de capital quando integralizo bens?', resposta: 'A integralização pode ser feita pelo valor histórico (sem ganho de capital) ou pelo valor de mercado (com ganho tributável). Cada opção tem impactos diferentes em IR e na base de cálculo futura de ITCMD.' },
-    { pergunta: 'Holding reduz ITCMD na sucessão?', resposta: 'Pode reduzir, sim — principalmente quando combinada com doação antecipada com reserva de usufruto. A alíquota varia por estado (4% a 8%). Muitas vezes a organização sucessória pesa mais que a economia fiscal.' },
+    { pergunta: 'Holding reduz ITCMD na sucessão?', resposta: 'O efeito tributário depende do estado, dos bens, dos atos pretendidos e das regras vigentes. A análise compara custos e consequências antes de escolher uma estrutura.' },
     { pergunta: 'O que é lucro presumido em holding — e quando se aplica?', resposta: 'Regime em que o lucro tributável é calculado por presunção sobre a receita bruta. Em holdings com fluxo imobiliário ou de participações, pode ser <em>mais adequado</em> que o lucro real — mas tem limites e exigências próprias.' },
     { pergunta: 'Quanto tempo leva a constituição completa?', resposta: 'De diagnóstico à operação, tipicamente entre 60 e 120 dias. Projetos com família extensa, múltiplos imóveis ou participações societárias em reorganização podem exigir prazos maiores.' },
   ],
@@ -97,7 +97,7 @@ const govFamiliar: Frente = {
   emph: 'Familiar',
   metaTitulo: 'Governança Familiar — Thiago Seixas Advocacia Societária',
   metaDescricao: 'Governança familiar para patrimônios compartilhados. Acordo familiar, protocolos, conselho, sucessão de gestão.',
-  heroH1: 'Patrimônio em família se organiza por <em>regras vivas</em> — não por improviso.',
+  heroH1: 'Patrimônio em família pede <em>regras claras</em> para os próximos passos.',
   heroLede: 'Governança familiar é o conjunto de instrumentos que organiza a relação entre pessoas e patrimônio. Quando bem-feita, transforma decisões compartilhadas em processo <em>previsível e calmo</em>, em vez de atrito permanente.',
   facts: [
     { lbl: 'Foco', val: 'Famílias com <em>patrimônio</em> compartilhado' },
@@ -258,8 +258,8 @@ const orgSucessoria: Frente = {
   emph: 'Sucessória',
   metaTitulo: 'Organização Sucessória — Thiago Seixas Advocacia Societária',
   metaDescricao: 'Planejamento sucessório: ITCMD, doação com reserva de usufruto, testamento, cláusulas protetivas e interface com holding.',
-  heroH1: 'Sucessão bem <em>planejada</em> evita que a herança vire conflito.',
-  heroLede: 'Organização sucessória é a construção, ainda em vida, da transmissão patrimonial que ocorrerá depois. Quando bem-feita, <em>reduz impostos, evita conflitos entre herdeiros, respeita a vontade do titular</em> e garante continuidade.',
+  heroH1: 'A continuidade da família e da empresa merece uma <em>conversa preparada.</em>',
+  heroLede: 'Organização sucessória é a construção, ainda em vida, da transmissão patrimonial que ocorrerá depois. A análise considera a vontade do titular, os direitos dos envolvidos, os efeitos tributários e as condições de continuidade.',
   facts: [
     { lbl: 'Foco', val: '<em>Transmissão</em> patrimonial planejada' },
     { lbl: 'Instrumentos', val: 'Doação, <em>usufruto</em>, testamento, holding' },
@@ -292,7 +292,7 @@ const orgSucessoria: Frente = {
   ],
   philosophyQuote: 'Sucessão não é tema para depois. Planejada em <em>vida e em paz</em>, vira continuidade. Adiada até o evento, vira <em>processo</em> e conflito.',
   faqs: [
-    { pergunta: 'Doação em vida reduz ITCMD?', resposta: 'Pode reduzir, especialmente em estados com alíquota menor ou antes de mudança legislativa. Mas <em>a doação em si paga ITCMD</em>. O ganho está na diferença entre pagar agora ou depois.' },
+    { pergunta: 'Doação em vida reduz ITCMD?', resposta: 'A doação pode ter incidência de ITCMD. A análise considera a legislação estadual, a base de cálculo, os direitos envolvidos e os custos de cada alternativa; antecipar a transmissão não assegura economia.' },
     { pergunta: 'Testamento substitui doação?', resposta: 'São instrumentos complementares, não substitutos. <em>Planos robustos usam os dois</em>.' },
     { pergunta: 'Reserva de usufruto mantém o controle?', resposta: 'Sim — mantém o <em>direito de uso, gestão e percepção de rendimentos</em>. Donatários são nus-proprietários.' },
     { pergunta: 'ITCMD muda ao longo do tempo?', resposta: 'Muda. O movimento predominante tem sido <em>aumento de alíquotas e redução de benefícios</em> — planejar antes da mudança costuma ser vantajoso.' },
