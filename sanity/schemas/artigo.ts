@@ -207,7 +207,7 @@ export const artigo = defineType({
     select: { title: 'titulo', cat: 'categoriaRef.titulo', date: 'publicadoEm', oldDate: 'dataPublicacao', oldCat: 'categoria', media: 'capa' },
     prepare({ title, cat, date, oldDate, oldCat, media }) {
       const value = date || oldDate;
-      const d = value ? new Date(value).toLocaleDateString('pt-BR') : '';
+      const d = value ? (/^\d{4}-\d{2}-\d{2}$/.test(value) ? value.split('-').reverse().join('/') : new Date(value).toLocaleDateString('pt-BR')) : '';
       return { title: title, subtitle: [cat || oldCat, d].filter(Boolean).join(' · '), media };
     },
   },
