@@ -12,7 +12,8 @@
     "sanity:dev": "sanity dev",
     "sanity:deploy": "sanity deploy",
     "seed": "tsx scripts/seed-sanity.ts",
-    "test": "tsx --test tests/*.test.ts"
+    "test": "tsx --test tests/*.test.ts",
+    "sanity:build:standalone": "cd sanity && SANITY_STUDIO_BASE_PATH=/ sanity build ../studio-dist --yes"
   },
   "dependencies": {
     "@portabletext/react": "^3.1.0",

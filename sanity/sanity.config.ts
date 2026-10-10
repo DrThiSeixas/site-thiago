@@ -8,7 +8,7 @@ export default defineConfig({
   title: 'Thiago Seixas — Editorial',
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'gdnd8m1i',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
-  basePath: '/studio',
+  basePath: process.env.SANITY_STUDIO_BASE_PATH || '/studio',
   plugins: [
     structureTool({
       structure: (S) =>

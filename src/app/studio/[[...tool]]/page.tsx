@@ -1,14 +1,8 @@
-/**
- * Studio Sanity embedado na rota /studio.
- * Edição de conteúdo direto no domínio thiagoseixas.adv.br/studio.
- */
-'use client';
+import { redirect } from 'next/navigation';
+import type { Metadata } from 'next';
 
-import { NextStudio } from 'next-sanity/studio';
-import config from '../../../../sanity/sanity.config';
-
-export const dynamic = 'force-static';
+export const metadata: Metadata = { title: 'Editor de artigos', robots: { index: false, follow: false } };
 
 export default function StudioPage() {
-  return <NextStudio config={config} />;
+  redirect('https://studio-thiagoseixas.netlify.app');
 }
