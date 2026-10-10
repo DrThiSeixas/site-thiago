@@ -10,6 +10,15 @@ export const artigo = defineType({
     { name: 'meta', title: 'Meta' },
   ],
   fields: [
+    defineField({ name: 'area', title: 'Frente de atuação', type: 'string', group: 'conteudo', options: { list: [{title:'Societário',value:'societario'},{title:'Tributário',value:'tributario'}], layout:'radio' }, initialValue:'societario', validation:r=>r.required() }),
+    defineField({ name:'statusEditorial', title:'Revisão editorial', type:'string', group:'meta', initialValue:'rascunho', options:{list:[{title:'Rascunho',value:'rascunho'},{title:'Em revisão',value:'revisao'},{title:'Aprovado por Thiago',value:'aprovado'}]}, description:'Marque aprovado somente após a aprovação individual de Thiago para esta versão do texto.', validation:r=>r.required().custom(v=>v==='aprovado'||'O artigo deve ser aprovado por Thiago antes da publicação.') }),
+    defineField({ name:'retirado', title:'Retirar temporariamente do site', type:'boolean', group:'meta', initialValue:false, description:'Publicar esta alteração oculta o artigo das listas e da página individual, preservando o texto no Sanity.' }),
+    defineField({ name:'fontes', title:'Fontes e data de conferência', type:'text', group:'meta', description:'Registre as fontes primárias, links e a data da revisão jurídica. Campo interno.' }),
+    defineField({ name:'resumo', title:'Resumo anterior',type:'text',group:'meta',readOnly:true,hidden:({document})=>!document?.resumo }),
+    defineField({ name:'conteudo',title:'Texto anterior',type:'array',of:[{type:'block'}],group:'meta',readOnly:true,hidden:({document})=>!document?.conteudo }),
+    defineField({ name:'dataPublicacao',title:'Data anterior',type:'date',group:'meta',readOnly:true,hidden:({document})=>!document?.dataPublicacao }),
+    defineField({ name:'categoria',title:'Categoria anterior',type:'string',group:'meta',readOnly:true,hidden:({document})=>!document?.categoria }),
+    defineField({ name:'destaque',title:'Destaque anterior',type:'boolean',group:'meta',readOnly:true,hidden:true }),
     defineField({
       name: 'titulo',
       title: 'Título',
@@ -35,7 +44,7 @@ export const artigo = defineType({
       group: 'conteudo',
     }),
     defineField({
-      name: 'categoria',
+      name: 'categoriaRef',
       title: 'Categoria',
       type: 'reference',
       to: [{ type: 'categoria' }],
@@ -70,11 +79,12 @@ export const artigo = defineType({
       title: 'Imagem de capa (opcional)',
       type: 'image',
       options: { hotspot: true },
-      fields: [{ name: 'alt', title: 'Texto alternativo', type: 'string' }],
+      fields: [{ name: 'alt', title: 'Texto alternativo', type: 'string', validation: (r:any) => r.required() }],
       group: 'conteudo',
     }),
     defineField({
       name: 'corpo',
+      validation: r => r.required().min(1),
       title: 'Corpo do artigo',
       type: 'array',
       group: 'conteudo',
@@ -190,7 +200,7 @@ export const artigo = defineType({
     { title: 'Título (A-Z)', name: 'tituloAsc', by: [{ field: 'titulo', direction: 'asc' }] },
   ],
   preview: {
-    select: { title: 'titulo', cat: 'categoria.titulo', date: 'publicadoEm', media: 'capa' },
+    select: { title: 'titulo', cat: 'categoriaRef.titulo', date: 'publicadoEm', media: 'capa' },
     prepare({ title, cat, date, media }) {
       const d = date ? new Date(date).toLocaleDateString('pt-BR') : '';
       return { title: title, subtitle: [cat, d].filter(Boolean).join(' · '), media };

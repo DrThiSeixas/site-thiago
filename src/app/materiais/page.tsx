@@ -38,7 +38,7 @@ export default function MateriaisPage() {
   return (
     <>
       <Nav />
-      <header className="page-head">
+      <header id="conteudo" className="page-head">
         <div className="wrap">
           <div className="crumb"><Link href="/">Início</Link><span className="sep">/</span>Materiais</div>
           <h1 className="fade d1" dangerouslySetInnerHTML={{__html:'Guias técnicos densos sobre <em>holding</em>, governança e sucessão.'}} />

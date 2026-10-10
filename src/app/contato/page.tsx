@@ -19,7 +19,7 @@ export default function ContatoPage() {
   return (
     <>
       <Nav />
-      <header className="page-head">
+      <header id="conteudo" className="page-head">
         <div className="wrap">
           <div className="crumb"><Link href="/">Início</Link><span className="sep">/</span>Contato</div>
           <h1 className="fade d1">Apresente sua demanda para análise inicial.</h1>
@@ -34,7 +34,7 @@ export default function ContatoPage() {
         <div className="wrap">
           <div className="contact-grid">
             <div className="form-wrap">
-              <h2>Formulário <em>qualificador</em></h2>
+              <h2>Conte sua <em>situação</em></h2>
               <p className="note">As informações abaixo ajudam a identificar a natureza da demanda e o melhor encaminhamento técnico.</p>
               <ContactForm origem="contato" submitLabel="Enviar demanda" />
             </div>
@@ -84,7 +84,7 @@ export default function ContatoPage() {
           <span className="eyebrow">Aviso de segurança</span>
           <h3>Todas as comunicações ocorrem <em>exclusivamente</em> pelos canais oficiais.</h3>
           <p>O escritório <strong>{site.nome}</strong> realiza suas comunicações, envio de documentos e tratativas exclusivamente pelos canais listados nesta página: o e-mail <strong>{site.contato.email}</strong>, o WhatsApp oficial <strong>{site.contato.whatsappFormatado}</strong>, o perfil oficial no LinkedIn e este site <strong>thiagoseixas.adv.br</strong>.</p>
-          <p>Não são utilizados <em>perfis pessoais em redes sociais, aplicativos de mensagem não oficiais ou endereços de e-mail de domínios genéricos</em> para qualquer tipo de comunicação profissional.</p>
+          
           <p>Em caso de dúvida sobre a autenticidade de qualquer contato, confirme diretamente pelo e-mail ou WhatsApp oficiais antes de prosseguir.</p>
         </div>
       </section>

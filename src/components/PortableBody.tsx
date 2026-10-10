@@ -1,6 +1,7 @@
 import { PortableText, type PortableTextComponents } from '@portabletext/react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { headingId, safeHref } from '@/lib/article-format';
 import { urlFor } from '@/lib/sanity';
 
 /**
@@ -11,7 +12,7 @@ const components: PortableTextComponents = {
   block: {
     normal: ({ children }) => <p>{children}</p>,
     h2: ({ children, value }) => {
-      const id = String(children).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      const id = headingId(value);
       return <h2 id={id}>{children}</h2>;
     },
     h3: ({ children }) => <h3>{children}</h3>,
@@ -31,8 +32,8 @@ const components: PortableTextComponents = {
     em: ({ children }) => <em>{children}</em>,
     link: ({ children, value }) => {
       const externo = value?.externo;
-      const href = value?.href || '#';
-      if (externo) return <a href={href} target="_blank" rel="noopener">{children}</a>;
+      const href = safeHref(value?.href, '#');
+      if (externo) return <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>;
       return <Link href={href}>{children}</Link>;
     },
   },
@@ -59,9 +60,9 @@ const components: PortableTextComponents = {
     ),
     ctaArtigo: ({ value }) => (
       <div className="mid-cta">
-        <h4 dangerouslySetInnerHTML={{ __html: value.titulo || '' }} />
+        <h4>{value.titulo}</h4>
         {value.texto && <p>{value.texto}</p>}
-        <Link href={value.href || '/contato'}>
+        <Link href={safeHref(value.href)}>
           {value.labelBotao || 'Solicitar diagnóstico'} <span style={{ fontFamily: 'var(--font-instrument-serif)', fontStyle: 'italic' }}>→</span>
         </Link>
       </div>

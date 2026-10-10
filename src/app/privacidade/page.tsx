@@ -16,7 +16,7 @@ export default function PrivacidadePage() {
   return (
     <>
       <Nav />
-      <header className="page-head">
+      <header id="conteudo" className="page-head">
         <div className="wrap">
           <div className="crumb"><Link href="/">Início</Link><span className="sep">/</span>Política de Privacidade</div>
           <h1>Política de <em style={{fontFamily:'var(--font-instrument-serif)',color:'rgb(var(--brass-2))',fontWeight:400}}>privacidade</em></h1>

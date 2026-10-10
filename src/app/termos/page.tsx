@@ -16,7 +16,7 @@ export default function TermosPage() {
   return (
     <>
       <Nav />
-      <header className="page-head">
+      <header id="conteudo" className="page-head">
         <div className="wrap">
           <div className="crumb"><Link href="/">Início</Link><span className="sep">/</span>Termos de Uso</div>
           <h1>Termos de <em style={{fontFamily:'var(--font-instrument-serif)',color:'rgb(var(--brass-2))',fontWeight:400}}>uso</em></h1>

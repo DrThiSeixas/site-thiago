@@ -14,7 +14,7 @@ export function Footer() {
               <Image src="/assets/escudo.png" alt={site.nome} width={120} height={120} style={{ height: 56, width: 'auto' }} />
             </div>
             <p className="foot-desc">
-              Advocacia societária aplicada à organização de empresas, patrimônios e famílias empresárias. {site.oab}.
+              Advocacia empresarial, com atuação societária e tributária. {site.oab}.
             </p>
             <p
               className="foot-desc"
@@ -36,7 +36,7 @@ export function Footer() {
             <ul>
               <li><Link href="/">Home</Link></li>
               <li><Link href="/advocacia-societaria">Advocacia societária</Link></li>
-              <li><Link href="/holding-patrimonial-familiar">Holding patrimonial</Link></li>
+              <li><Link href="/advocacia-tributaria">Advocacia tributária</Link></li>
               <li><Link href="/metodo">Método</Link></li>
               <li><Link href="/artigos">Artigos</Link></li>
               <li><Link href="/contato">Contato</Link></li>
@@ -57,7 +57,7 @@ export function Footer() {
                 </TrackedContactLink>
               </li>
               <li><a href={site.contato.linkedin} target="_blank" rel="noopener">LinkedIn</a></li>
-              <li><Link href="/portal">Portal do Cliente</Link></li>
+              
             </ul>
           </div>
 

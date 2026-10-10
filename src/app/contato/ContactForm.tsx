@@ -4,7 +4,7 @@ import { useState, type FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { trackEvent } from '@/lib/analytics';
 
-type Status = 'idle' | 'loading' | 'error';
+type Status = 'idle' | 'loading' | 'error' | 'prepared';
 
 type ContactFormProps = {
   defaultFrente?: string;
@@ -15,6 +15,9 @@ type ContactFormProps = {
 
 const demandas = [
   'Advocacia societária',
+  'Tributário — cobrança ou dívida ativa',
+  'Tributário — execução fiscal ou bloqueio',
+  'Tributário — parcelamento ou transação',
   'Holding patrimonial',
   'Planejamento sucessório',
   'Acordo de sócios',
@@ -58,7 +61,7 @@ export function ContactForm({
         });
 
         window.location.href = `mailto:${process.env.NEXT_PUBLIC_EMAIL || 'contato@thiagoseixas.adv.br'}?subject=${encodeURIComponent('Contato via site')}&body=${encodeURIComponent(body)}`;
-        setStatus('idle');
+        setStatus('prepared');
         return;
       }
 
@@ -85,6 +88,7 @@ export function ContactForm({
 
   return (
     <form className="quali" onSubmit={handleSubmit}>
+      {!endpoint && <p className="form-help">Este formulário prepara uma mensagem no seu aplicativo de e-mail. Você precisará revisar e enviar a mensagem nele. Prefere outro canal? Use o WhatsApp ao lado.</p>}
       <input type="hidden" name="origem" value={origem} />
       <input type="hidden" name="pagina" value={origem} />
 
@@ -120,7 +124,7 @@ export function ContactForm({
           id={`cenario-${origem}`}
           name="cenario"
           required
-          placeholder="Descreva em poucas linhas o cenário: empresa, sócios, família, patrimônio ou ato societário que precisa ser analisado."
+          placeholder="Descreva em poucas linhas o cenário: empresa, sócios, família ou cobrança tributária. Informe se existe prazo em andamento."
         />
       </div>
 
@@ -129,6 +133,7 @@ export function ContactForm({
         <span>Li e concordo com a <a href="/privacidade">Política de Privacidade</a>. Autorizo o contato pelos canais informados.</span>
       </label>
 
+      {status === 'prepared' && <p className="form-help" role="status">Mensagem preparada. Conclua o envio no seu aplicativo de e-mail; o site ainda não confirma o recebimento. Se o aplicativo não abriu, use os canais oficiais ao lado.</p>}
       {status === 'error' && (
         <p className="form-error">
           Erro ao enviar. Tente novamente ou utilize os canais oficiais de contato.
@@ -136,7 +141,7 @@ export function ContactForm({
       )}
 
       <button type="submit" disabled={status === 'loading'}>
-        {status === 'loading' ? 'Enviando…' : submitLabel} <span className="arr">→</span>
+        {status === 'loading' ? 'Preparando…' : endpoint ? submitLabel : 'Preparar e-mail'} <span className="arr">→</span>
       </button>
     </form>
   );

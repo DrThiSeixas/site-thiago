@@ -4,19 +4,19 @@
  */
 
 export const site = {
-  nome: 'Thiago Seixas Advocacia Societária',
+  nome: 'Thiago Seixas — Advocacia Empresarial',
   nomeCurto: 'Thiago Seixas',
   oab: 'OAB/SP 249.179',
   autor: 'Thiago Seixas',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://thiagoseixas.adv.br',
   descricao:
-    'Advocacia societária aplicada à organização de empresas, patrimônios e famílias empresárias. Holding patrimonial, governança familiar e organização sucessória com visão preventiva.',
+    'Advocacia societária e tributária para empresas. Regras entre sócios, continuidade empresarial e análise jurídica de cobranças fiscais.',
 
   contato: {
     email: process.env.NEXT_PUBLIC_EMAIL || 'contato@thiagoseixas.adv.br',
     whatsapp: process.env.NEXT_PUBLIC_WHATSAPP || '5519999302552',
     whatsappFormatado: '(19) 99930-2552',
-    linkedin: 'https://www.linkedin.com/in/thiagoseixas',
+    linkedin: 'https://www.linkedin.com/in/thiago-seixasadv/',
   },
 
   endereco: {
@@ -30,7 +30,7 @@ export const site = {
 
   nav: [
     { href: '/advocacia-societaria', label: 'Societário' },
-    { href: '/holding-patrimonial-familiar', label: 'Holding' },
+    { href: '/advocacia-tributaria', label: 'Tributário' },
     { href: '/metodo', label: 'Método' },
     { href: '/artigos', label: 'Artigos' },
     { href: '/sobre', label: 'Sobre' },

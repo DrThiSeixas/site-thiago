@@ -5,6 +5,7 @@ import { Footer } from '@/components/Footer';
 import { Whats } from '@/components/Whats';
 import { sanityClient } from '@/lib/sanity';
 import { artigosQuery, categoriasQuery } from '@/lib/queries';
+import { acervo } from '@/lib/acervo';
 import { site } from '@/lib/site';
 import '../internals.css';
 
@@ -12,7 +13,7 @@ export const revalidate = 600;
 
 export const metadata: Metadata = {
   title: 'Artigos',
-  description: 'Textos técnicos sobre holding, governança familiar e societária, organização sucessória e reorganização societária.',
+  description: 'Artigos sobre regras entre sócios, continuidade empresarial, cobranças fiscais e alternativas tributárias.',
   openGraph: { title: `Artigos — ${site.nomeCurto}`, images: ['/assets/fotos/og-institucional.jpg'] },
   alternates: { canonical: '/artigos' },
 };
@@ -24,6 +25,7 @@ type Artigo = {
   chamada: string;
   publicadoEm: string;
   tempoLeitura?: number;
+  area: string;
   categoria?: { titulo: string; slug: { current: string } };
 };
 
@@ -34,7 +36,10 @@ function formatarData(iso: string) {
   catch { return ''; }
 }
 
-export default async function ArtigosPage() {
+export default async function ArtigosPage({searchParams}:{searchParams:Promise<{area?:string;cat?:string}>}) {
+  const params=await searchParams;
+  const area=['societario','tributario'].includes(params.area||'')?params.area:undefined;
+  let unavailable=false;
   let artigos: Artigo[] = [];
   let categorias: Categoria[] = [];
   try {
@@ -43,27 +48,31 @@ export default async function ArtigosPage() {
       sanityClient.fetch<Categoria[]>(categoriasQuery),
     ]);
   } catch {
-    artigos = []; categorias = [];
+    artigos = []; categorias = []; unavailable=true;
+    console.error('Falha ao consultar o editorial no Sanity.');
   }
 
+  artigos=artigos.filter(a=>(!area||a.area===area)&&(!params.cat||a.categoria?.slug?.current===params.cat));
   return (
     <>
       <Nav />
-      <header className="page-head">
+      <header id="conteudo" className="page-head">
         <div className="wrap">
           <div className="crumb"><Link href="/">Início</Link><span className="sep">/</span>Artigos</div>
-          <h1 className="fade d1" dangerouslySetInnerHTML={{__html:'Textos técnicos sobre <em>holding</em>, governança e sucessão.'}} />
+          <h1 className="fade d1">Leituras sobre a sociedade<br/>e as questões tributárias da empresa.</h1>
           <p className="lede fade d2">Reflexões autorais sobre decisões jurídicas, tributárias e estruturais que aparecem nos projetos do escritório. Sem receita pronta — cada texto é um recorte de um problema real que exige leitura atenta.</p>
         </div>
       </header>
 
-      {categorias.length > 0 && (
+      {(
         <section className="filters">
           <div className="wrap">
             <div className="filter-list">
-              <Link href="/artigos" className="filter-chip active">Todos</Link>
+              <Link href="/artigos" className={`filter-chip ${!area&&!params.cat?'active':''}`}>Todos</Link>
+              <Link href="/artigos?area=societario" className={`filter-chip ${area==='societario'?'active':''}`}>Societário</Link>
+              <Link href="/artigos?area=tributario" className={`filter-chip ${area==='tributario'?'active':''}`}>Tributário</Link>
               {categorias.map((c) => (
-                <Link key={c.slug.current} href={`/artigos?cat=${c.slug.current}`} className="filter-chip">
+                <Link key={c.slug.current} href={`/artigos?cat=${encodeURIComponent(c.slug.current)}`} className={`filter-chip ${params.cat===c.slug.current?'active':''}`}>
                   {c.titulo}
                 </Link>
               ))}
@@ -76,7 +85,7 @@ export default async function ArtigosPage() {
         <div className="wrap">
           {artigos.length === 0 ? (
             <div style={{padding:'80px 0',textAlign:'center',color:'rgba(239,231,212,.6)',fontFamily:'var(--font-instrument-serif)',fontStyle:'italic',fontSize:18}}>
-              Os primeiros ensaios serão publicados em breve.
+              {unavailable?'Os artigos estão temporariamente indisponíveis. Tente novamente mais tarde.':'Ainda não há artigos publicados nesta seleção.'}
             </div>
           ) : (
             <div className="artigos-grid">
@@ -96,6 +105,7 @@ export default async function ArtigosPage() {
         </div>
       </section>
 
+      {!params.cat && area!=='tributario' && <section><div className="wrap"><h2 style={{fontSize:36,marginBottom:28}}>Do acervo revisado</h2><div className="artigos-grid">{acervo.map(a=><Link className="card-art" key={a.slug} href={`/acervo/${a.slug}`}><span className="cat">{a.categoria}</span><h3>{a.titulo}</h3><p>{a.chamada}</p><div className="foot">Revisado em outubro de 2026 <span>→</span></div></Link>)}</div></div></section>}
       <Footer />
       <Whats />
     </>

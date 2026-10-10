@@ -29,6 +29,7 @@ export function SchemaOrg() {
         founder: { '@id': `${site.url}#person` },
         knowsAbout: [
           'Direito Societário',
+          'Direito Tributário',
           'Holding Patrimonial',
           'Governança Familiar',
           'Governança Societária',
@@ -67,7 +68,7 @@ export function SchemaOrg() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
     />
   );
 }
@@ -115,7 +116,7 @@ export function ArticleSchema({
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
     />
   );
 }

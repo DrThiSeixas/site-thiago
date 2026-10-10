@@ -74,11 +74,11 @@ export default function MetodoPage() {
   return (
     <>
       <Nav />
-      <header className="page-head">
+      <header id="conteudo" className="page-head">
         <div className="wrap">
           <div className="crumb"><Link href="/">Início</Link><span className="sep">/</span>Método</div>
           <h1 className="fade d1" dangerouslySetInnerHTML={{__html:'Um processo definido, da <em>escuta</em> ao acompanhamento contínuo.'}} />
-          <p className="lede fade d2">Todo projeto é conduzido por seis etapas claras, com entregas identificáveis, documentação estruturada e prazo definido. Sem improviso, sem modelo genérico, sem sumir depois da assinatura.</p>
+          <p className="lede fade d2">O trabalho começa pela compreensão do cenário. Escopo, documentos, etapas, prazos e acompanhamento são definidos conforme a demanda e as condições da contratação.</p>
         </div>
       </header>
 
