@@ -14,10 +14,10 @@ export const artigo = defineType({
     defineField({ name:'statusEditorial', title:'Revisão editorial', type:'string', group:'meta', initialValue:'rascunho', options:{list:[{title:'Rascunho',value:'rascunho'},{title:'Em revisão',value:'revisao'},{title:'Aprovado por Thiago',value:'aprovado'}]}, description:'Marque aprovado somente após a aprovação individual de Thiago para esta versão do texto.', validation:r=>r.required().custom(v=>v==='aprovado'||'O artigo deve ser aprovado por Thiago antes da publicação.') }),
     defineField({ name:'retirado', title:'Retirar temporariamente do site', type:'boolean', group:'meta', initialValue:false, description:'Publicar esta alteração oculta o artigo das listas e da página individual, preservando o texto no Sanity.' }),
     defineField({ name:'fontes', title:'Fontes e data de conferência', type:'text', group:'meta', description:'Registre fontes públicas, links e a data da revisão jurídica. Este dataset é público: não inclua informações confidenciais.' }),
-    defineField({ name:'resumo', title:'Resumo anterior',type:'text',group:'meta',readOnly:true,hidden:({document})=>!document?.resumo }),
-    defineField({ name:'conteudo',title:'Texto anterior',type:'array',of:[{type:'block'}],group:'meta',readOnly:true,hidden:({document})=>!document?.conteudo }),
-    defineField({ name:'dataPublicacao',title:'Data anterior',type:'date',group:'meta',readOnly:true,hidden:({document})=>!document?.dataPublicacao }),
-    defineField({ name:'categoria',title:'Categoria anterior',type:'string',group:'meta',readOnly:true,hidden:({document})=>!document?.categoria }),
+    defineField({ name:'resumo', title:'Chamada do artigo',type:'text',group:'conteudo',hidden:({document})=>!document?.resumo||!!document?.chamada }),
+    defineField({ name:'conteudo',title:'Texto do artigo',type:'array',of:[{type:'block'}],group:'conteudo',hidden:({document})=>!document?.conteudo||!!document?.corpo }),
+    defineField({ name:'dataPublicacao',title:'Data de publicação',type:'date',group:'conteudo',hidden:({document})=>!document?.dataPublicacao||!!document?.publicadoEm }),
+    defineField({ name:'categoria',title:'Categoria do artigo',type:'string',group:'conteudo',hidden:({document})=>!document?.categoria||!!document?.categoriaRef }),
     defineField({ name:'destaque',title:'Destaque anterior',type:'boolean',group:'meta',readOnly:true,hidden:true }),
     defineField({
       name: 'titulo',
@@ -40,7 +40,8 @@ export const artigo = defineType({
       description: 'Frase de abertura grande, aparece no topo do artigo e em cards.',
       type: 'text',
       rows: 3,
-      validation: (r) => r.required().max(260),
+      validation: (r) => r.max(260).custom((v,c)=>v||c.document?.resumo ? true : 'Preencha a chamada.'),
+      hidden: ({document})=>!!document?.resumo&&!document?.chamada,
       group: 'conteudo',
     }),
     defineField({
@@ -48,7 +49,8 @@ export const artigo = defineType({
       title: 'Categoria',
       type: 'reference',
       to: [{ type: 'categoria' }],
-      validation: (r) => r.required(),
+      validation: (r) => r.custom((v,c)=>v||c.document?.categoria ? true : 'Selecione a categoria.'),
+      hidden: ({document})=>!!document?.categoria&&!document?.categoriaRef,
       group: 'conteudo',
     }),
     defineField({
@@ -64,7 +66,8 @@ export const artigo = defineType({
       title: 'Publicado em',
       type: 'datetime',
       initialValue: () => new Date().toISOString(),
-      validation: (r) => r.required(),
+      validation: (r) => r.custom((v,c)=>v||c.document?.dataPublicacao ? true : 'Preencha a data.'),
+      hidden: ({document})=>!!document?.dataPublicacao&&!document?.publicadoEm,
       group: 'conteudo',
     }),
     defineField({
@@ -84,7 +87,8 @@ export const artigo = defineType({
     }),
     defineField({
       name: 'corpo',
-      validation: r => r.required().min(1),
+      validation: r => r.custom((v,c)=>(Array.isArray(v)&&v.length>0)||(Array.isArray(c.document?.conteudo)&&c.document.conteudo.length>0) ? true : 'Preencha o texto do artigo.'),
+      hidden: ({document})=>!!document?.conteudo&&!document?.corpo,
       title: 'Corpo do artigo',
       type: 'array',
       group: 'conteudo',
@@ -200,10 +204,11 @@ export const artigo = defineType({
     { title: 'Título (A-Z)', name: 'tituloAsc', by: [{ field: 'titulo', direction: 'asc' }] },
   ],
   preview: {
-    select: { title: 'titulo', cat: 'categoriaRef.titulo', date: 'publicadoEm', media: 'capa' },
-    prepare({ title, cat, date, media }) {
-      const d = date ? new Date(date).toLocaleDateString('pt-BR') : '';
-      return { title: title, subtitle: [cat, d].filter(Boolean).join(' · '), media };
+    select: { title: 'titulo', cat: 'categoriaRef.titulo', date: 'publicadoEm', oldDate: 'dataPublicacao', oldCat: 'categoria', media: 'capa' },
+    prepare({ title, cat, date, oldDate, oldCat, media }) {
+      const value = date || oldDate;
+      const d = value ? new Date(value).toLocaleDateString('pt-BR') : '';
+      return { title: title, subtitle: [cat || oldCat, d].filter(Boolean).join(' · '), media };
     },
   },
 });
