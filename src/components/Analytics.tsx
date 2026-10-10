@@ -5,7 +5,7 @@ import Script from 'next/script';
  * Em ambiente de desenvolvimento (NODE_ENV !== 'production'), não carrega.
  */
 export function Analytics() {
-  const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
+  const gtmId = process.env.NEXT_PUBLIC_GTM_ID || 'GTM-TXD2HF2S';
   const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
   const awId = process.env.NEXT_PUBLIC_AW_CONVERSION_ID;
 
@@ -42,7 +42,7 @@ export function Analytics() {
 }
 
 export function AnalyticsNoscript() {
-  const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
+  const gtmId = process.env.NEXT_PUBLIC_GTM_ID || 'GTM-TXD2HF2S';
   if (!gtmId || process.env.NODE_ENV !== 'production') return null;
   return (
     <noscript>
