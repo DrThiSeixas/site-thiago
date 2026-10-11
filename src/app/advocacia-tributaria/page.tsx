@@ -1,3 +1,5 @@
+import { TrackedContactLink } from '@/components/TrackedContactLink';
+import { waUrl } from '@/lib/site';
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 import { Contact } from '@/components/editorial/Contact';
@@ -14,7 +16,7 @@ const situations = [
   ['Meu contador enviou uma notificação.', 'O que ela está comunicando?', 'Identificar o órgão, o assunto e as providências indicadas, inclusive em comunicações sobre o Simples Nacional.'],
   ['Apareceu um serviço e a certidão não saiu.', 'Qual pendência está impedindo a emissão?', 'Conferir o documento solicitado e as informações fiscais antes de escolher uma medida.'],
   ['A prestação parece caber. E o restante?', 'Que compromisso a empresa vai assumir?', 'Examinar entrada, parcelas, demais condições e obrigações que continuarão vencendo.'],
-  ['Não sei quanto devo nem para quem.', 'Por onde começar a organizar a situação?', 'Reunir os registros disponíveis para compreender a composição e o estágio das pendências.'],
+  ['A empresa recebeu uma citação.', 'O que precisa ser examinado no processo?', 'Identificar a cobrança, as comunicações recebidas e os prazos aplicáveis para avaliar as medidas juridicamente cabíveis.'],
 ];
 const services = [
   ['Compreender o que está sendo cobrado', 'Conferência dos documentos, da origem e composição dos débitos, dos órgãos envolvidos e da situação da cobrança.'],
@@ -37,12 +39,13 @@ const questions = [
   ['Preciso ter todos os documentos antes de entrar em contato?', 'Não é necessário organizar tudo para apresentar a dúvida inicial. Conte o que aconteceu e quais informações já possui; alinharemos o que será necessário. Se houver prazo indicado em uma comunicação, informe desde o início. A mensagem pelo site não suspende prazos nem constitui contratação.'],
 ];
 export default function Tributario() {
-  return <><Nav /><main id="conteudo" className="approved">
+  return <><Nav /><main id="conteudo" className="approved tax-landing">
     <section className="hero" id="inicio">
       <div className="hero-copy"><p className="eyebrow">TRIBUTÁRIO EMPRESARIAL</p>
-        <h1>A dívida preocupa.<br />O compromisso precisa<br /><em>ser compreendido.</em></h1>
-        <p className="lead">Uma notificação, uma certidão que não sai ou uma proposta de parcelamento: antes de decidir, entenda o que está em jogo e o que cada caminho exige da sua empresa.</p>
-        <div className="hero-actions"><a className="button light" href="#contato">Conversar sobre minha situação ↗</a><a className="text-link" href="#como-comeca">Entender como funciona ↓</a></div>
+        <h1>Sua empresa recebeu uma cobrança tributária. <em>O que precisa ser esclarecido antes de decidir?</em></h1>
+        <p className="lead">Entenda o que está sendo cobrado, quais documentos precisam ser examinados e quais condições cada alternativa exige. Antes de assumir parcelas, é preciso avaliar os compromissos envolvidos e a capacidade de cumpri-los.</p>
+        <div className="hero-actions"><TrackedContactLink className="button light" href={waUrl("Olá, gostaria de conversar sobre uma questão tributária da minha empresa.")} eventName="click_whatsapp" local="tributario_hero" target="_blank" rel="noopener noreferrer">Conversar sobre minha situação ↗</TrackedContactLink><a className="text-link" href="#como-comeca">Entender como funciona ↓</a></div>
+        <p className="hero-detail">No primeiro contato, apresente a situação em linhas gerais. O escopo do trabalho e os honorários são definidos antes da contratação.</p>
         <div className="hero-foot">THIAGO SEIXAS · OAB/SP 249.179</div>
       </div>
       <aside className="tax-steps" aria-label="Perguntas que orientam a análise">
@@ -53,7 +56,8 @@ export default function Tributario() {
     </section>
     <div className="intro-strip"><p>A dívida faz parte do cenário.<br /><strong>A empresa continua funcionando.</strong></p><p>Em um período de aperto, folha e fornecedores podem ter recebido prioridade, enquanto os tributos ficaram para depois. Entender as pendências agora exige olhar para os documentos e para a realidade da empresa, com respeito à sua trajetória.</p></div>
     <section className="section" id="situacoes"><div className="section-heading"><p className="eyebrow dark">O QUE TROUXE VOCÊ ATÉ AQUI?</p><h2>Uma situação concreta.<br />Uma dúvida a esclarecer.</h2></div><div className="tax-services">{situations.map(([scene, question, copy]) => <article key={scene}><small>{scene}</small><h3>{question}</h3><p>{copy}</p></article>)}</div></section>
-    <section className="section process" id="atuacao"><div className="section-heading"><p className="eyebrow dark">O TRABALHO JURÍDICO</p><h2>O que precisa ser examinado<br />antes de escolher um caminho.</h2><p>A análise parte das informações do caso. Os serviços e as entregas são delimitados na contratação.</p></div><div className="tax-services">{services.map(([title, copy], i) => <article key={title}><small>0{i + 1}</small><h3>{title}</h3><p>{copy}</p></article>)}</div></section>
+    <section className="section" id="execucao-fiscal"><div className="section-heading"><p className="eyebrow dark">EXECUÇÃO FISCAL EMPRESARIAL</p><h2>Sua empresa foi citada em uma execução fiscal. <em>O primeiro passo é entender o processo.</em></h2><p>Examinamos a cobrança, as comunicações recebidas e os prazos aplicáveis para avaliar as medidas juridicamente cabíveis no escopo contratado.</p><TrackedContactLink className="button" href={waUrl("Olá, gostaria de conversar sobre uma execução fiscal da minha empresa.")} eventName="click_whatsapp" local="tributario_execucao" target="_blank" rel="noopener noreferrer">Conversar sobre o processo ↗</TrackedContactLink></div></section>
+    <section className="section process" id="atuacao"><div className="section-heading"><p className="eyebrow dark">O TRABALHO JURÍDICO</p><h2>O que precisa ser examinado<br />antes de escolher um caminho.</h2><p>Conforme o escopo contratado, examinamos os documentos, identificamos as questões jurídicas e explicamos as condições e os limites das medidas aplicáveis.</p></div><div className="tax-services">{services.map(([title, copy], i) => <article key={title}><small>0{i + 1}</small><h3>{title}</h3><p>{copy}</p></article>)}</div></section>
     <section className="section" id="como-comeca"><div className="section-heading"><p className="eyebrow dark">COMO COMEÇA</p><h2>Você entende o trabalho.<br />Depois, decide sobre a contratação.</h2></div><div className="steps">{steps.map(([title, copy], i) => <article key={title}><span>0{i + 1}</span><h3>{title}</h3><p>{copy}</p></article>)}</div></section>
     <section className="section questions"><div><p className="eyebrow dark">DÚVIDAS ANTES DO PRIMEIRO CONTATO</p><h2>Dinheiro, documentos<br /><em>e próximos passos.</em></h2></div><div className="faq-list">{questions.map(([question, answer]) => <details key={question}><summary>{question}<span aria-hidden="true">+</span></summary><p>{answer}</p></details>)}</div></section>
     <ArticleHighlights area="tributario" /><Contact tax />
